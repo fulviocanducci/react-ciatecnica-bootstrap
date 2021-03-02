@@ -14,9 +14,9 @@ function Add() {
     }
     let item = { [name]: value };
     if (name === 'expire' && value === 'no') {
-      item['expireDate'] = '';
+      item['dateExpire'] = '';
     }
-    setData((state) => ({ ...state, [name]: value }));
+    setData((state) => ({ ...state, ...item }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();

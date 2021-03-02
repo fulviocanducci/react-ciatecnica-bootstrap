@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Col, Form, Row, Table, Badge } from 'react-bootstrap';
-import {
-  useUserChangeRemove,
-  useUserToList,
-} from '../../contexts/UsersContext';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BsPen } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
+
+import {
+  useUserChangeRemove,
+  useUserToList,
+} from '../../contexts/UsersContext';
 
 function List() {
   let history = useHistory();

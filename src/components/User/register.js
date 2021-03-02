@@ -191,10 +191,10 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
             <Col sm="4">
               <Form.Control
                 type="date"
-                name="expireDate"
-                id="expireDate"
+                name="dateExpire"
+                id="dateExpire"
                 placeholder=""
-                value={data.expireDate}
+                value={data.dateExpire}
                 onChange={onChange}
                 disabled={data.expire === 'no'}
               />
