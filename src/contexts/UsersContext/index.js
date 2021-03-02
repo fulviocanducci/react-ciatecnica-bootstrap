@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import lists from './users.js';
+import initData from './user_init.js';
 
 const UsersContextContext = createContext();
 
@@ -12,6 +13,10 @@ const UsersContextProvider = ({ children }) => {
     </UsersContextContext.Provider>
   );
 };
+
+export function useUserInitData() {
+  return initData;
+}
 
 export function useUserToList(filter = 'all') {
   const { data } = useContext(UsersContextContext);
@@ -27,7 +32,9 @@ export function useUserToList(filter = 'all') {
 
 export function useUserAdd() {
   const { setData } = useContext(UsersContextContext);
-  return (data) => setData((state) => [...state, data]);
+  return (result) => {
+    setData((state) => [...state, { ...result, id: state.length + 1 }]);
+  };
 }
 
 export function useUserEdit() {

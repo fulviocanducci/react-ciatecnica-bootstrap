@@ -3,6 +3,7 @@ import { Navbar, Container, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from '../Home';
 import Add from '../User/add';
+import Edit from '../User/edit';
 import List from '../User/List';
 
 const App = () => {
@@ -43,7 +44,7 @@ const App = () => {
             <Add />
           </Route>
           <Route path="/register/user/edit/:id">
-            <List />
+            <Edit />
           </Route>
           <Route path="/register/users">
             <List />

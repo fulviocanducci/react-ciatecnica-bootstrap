@@ -1,9 +1,35 @@
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Register from './register';
-
-import React from 'react';
+import { useUserAdd, useUserInitData } from '../../contexts/UsersContext';
 
 function Add() {
-  return <Register />;
+  let history = useHistory();
+  const [data, setData] = useState(useUserInitData());
+  const handleUserAdd = useUserAdd();
+  const handleOnChange = (e) => {
+    let { name, value } = e.target;
+    if (name === 'status') {
+      value = value === 'active';
+      console.log(value);
+    }
+    setData((state) => ({ ...state, [name]: value }));
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleUserAdd(data);
+    setTimeout(() => {
+      history.push('/register/users');
+    }, 500);
+  };
+  return (
+    <Register
+      data={data}
+      onChange={handleOnChange}
+      handleSubmit={handleSubmit}
+      label="Create"
+    />
+  );
 }
 
 export default Add;

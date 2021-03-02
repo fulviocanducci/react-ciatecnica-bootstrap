@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Form, Row, Table } from 'react-bootstrap';
+import { Button, Col, Form, Row, Table, Badge } from 'react-bootstrap';
 import {
   useUserChangeRemove,
   useUserToList,
@@ -7,20 +7,19 @@ import {
 import { BsFillPersonPlusFill } from 'react-icons/bs';
 import { BsFillTrashFill } from 'react-icons/bs';
 import { BsPen } from 'react-icons/bs';
-import { BsFunnel } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 
 function List() {
-  const [filter, setFilter] = useState('');
+  let history = useHistory();
+  const [filter, setFilter] = useState('all');
   const data = useUserToList(filter);
   const handleChangeRemove = useUserChangeRemove();
-  const history = useHistory();
   return (
     <>
       <Row className="mb-3">
         <Col sm={2}>
           <Button
-            variant="outline-primary"
+            variant="info"
             onClick={(e) => history.push('/register/user/add')}
           >
             <BsFillPersonPlusFill /> Add
@@ -41,9 +40,6 @@ function List() {
                 <option value="active">Active</option>
                 <option value="inactive">Inactive</option>
               </Form.Control>
-              <Button variant="outline-info">
-                <BsFunnel />
-              </Button>
             </Form.Group>
           </Form>
         </Col>
@@ -63,30 +59,53 @@ function List() {
       <Table striped bordered hover responsive="sm">
         <thead>
           <tr>
-            <th className="text-center">Name</th>
-            <th className="text-center">User Name</th>
-            <th className="text-center">Profile</th>
-            <th className="text-center">Status</th>
-            <th className="text-center">...</th>
+            <th scope="col" className="text-center">
+              Name
+            </th>
+            <th scope="col" className="text-center">
+              User Name
+            </th>
+            <th scope="col" className="text-center">
+              Profile
+            </th>
+            <th scope="col" className="text-center">
+              Status
+            </th>
+            <th scope="col" className="text-center">
+              ...
+            </th>
           </tr>
         </thead>
         <tbody>
           {data &&
             data.map((x, i) => (
-              <tr key={i}>
+              <tr key={i} className={!x.status ? 'table-danger' : ''}>
                 <td>{x.firstName + ' ' + x.lastName}</td>
                 <td className="text-center">{x.userName}</td>
                 <td className="text-center">{x.profile}</td>
                 <td className="text-center">
-                  {x.status ? 'Active' : 'Inactive'}
+                  <Badge variant="primary"></Badge>
+                  {x.status ? (
+                    <Badge pill variant="info" title="Active">
+                      Active
+                    </Badge>
+                  ) : (
+                    <Badge pill variant="danger" title="Inactive">
+                      Inactive
+                    </Badge>
+                  )}
                 </td>
                 <td className="text-center">
-                  <Button variant="outline-primary">
+                  <Button
+                    variant="primary"
+                    onClick={(e) => history.push(`/register/user/edit/${x.id}`)}
+                  >
                     <BsPen />
                   </Button>{' '}
                   <Button
-                    variant="outline-danger"
+                    variant="danger"
                     onClick={(e) => handleChangeRemove(x.id)}
+                    disabled={!x.status}
                   >
                     <BsFillTrashFill />
                   </Button>
