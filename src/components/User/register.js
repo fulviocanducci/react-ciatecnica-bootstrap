@@ -25,6 +25,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 placeholder="User name"
                 value={data.userName}
                 onChange={onChange}
+                required={true}
               />
             </Col>
           </Form.Group>
@@ -46,6 +47,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 id="firstName"
                 value={data.firstName}
                 onChange={onChange}
+                required={true}
               />
             </Col>
             <Col sm="5">
@@ -56,6 +58,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 id="lastName"
                 value={data.lastName}
                 onChange={onChange}
+                required={true}
               />
             </Col>
           </Form.Group>
@@ -72,6 +75,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 placeholder="E-mail"
                 value={data.email}
                 onChange={onChange}
+                required={true}
               />
             </Col>
           </Form.Group>
@@ -89,6 +93,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 value={data.phone}
                 onChange={onChange}
                 className="form-control"
+                pattern="\([0-9]{2}\)[0-9]{4}-[0-9]{4}"
               />
             </Col>
             <Form.Label column sm="2" className="text-right" htmlFor="celular">
@@ -103,6 +108,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
                 value={data.celular}
                 onChange={onChange}
                 className="form-control"
+                pattern="\([0-9]{2}\)[0-9]{5}-[0-9]{4}"
               />
             </Col>
           </Form.Group>
@@ -113,7 +119,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
             </Form.Label>
             <Col sm="8">
               <Form.Control
-                type="text"
+                type="password"
                 name="password"
                 id="password"
                 placeholder="Password"
@@ -134,7 +140,7 @@ function Register({ data, onChange, handleSubmit, label = 'Create' }) {
             </Form.Label>
             <Col sm="8">
               <Form.Control
-                type="text"
+                type="password"
                 name="confirmPassword"
                 id="confirmPassword"
                 placeholder="Confirm password"

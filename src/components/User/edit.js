@@ -15,9 +15,12 @@ function Edit() {
     let { name, value } = e.target;
     if (name === 'status') {
       value = value === 'active';
-      console.log(value);
     }
-    setData((state) => ({ ...state, [name]: value }));
+    let item = { [name]: value };
+    if (name === 'expire' && value === 'no') {
+      item['expireDate'] = '';
+    }
+    setData((state) => ({ ...state, ...item }));
   };
 
   const handleSubmit = (e) => {
